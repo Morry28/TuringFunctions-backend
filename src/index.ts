@@ -11,9 +11,7 @@ app.use(systemRoutes)
 
 
 ///home/century/OpenCV-backend/src/utils/ai/image.png
-const file = fs.readFileSync('/home/century/OpenCV-backend/src/utils/ai/image.png')//
 const payload = Array.from({ length: 10000 }, () => Math.floor(Math.random() * 10000));
-console.log(payload[0], typeof payload, payload)
 const worker = new TuringMaching('kolko je neparnych cisel?',[payload[0],payload[1]], 'Array')
 async function show(){
     console.log('result: ',await worker.run(payload))
