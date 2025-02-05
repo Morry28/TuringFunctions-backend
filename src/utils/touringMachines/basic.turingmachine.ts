@@ -16,7 +16,7 @@ class TuringMaching {
     }
 
     private async initializeRules() {
-        this.rules = await GPTRules.get(this.prompt, this.sample, this.type)
+        this.rules = await GPTRules.generate(this.prompt, this.sample, this.type)
         this.rules = this.rules.replace(/```javascript|```/g, "").trim();
 
     }
@@ -29,12 +29,14 @@ class TuringMaching {
         if (this.rules === null) return null
 
         try {
-            console.log("Generated Rules:", this.rules);
+            console.log('input:', input)
 
             for (let i = 0; i < 5; i++) {
                 const workload = new Function('input', `"use strict"; return (() => { ${this.rules} })();`);
+                
 
                 console.log('iteration:', i + 1)
+                console.log('rules:', this.rules)
                 await this.initializeRules()
                 const res = await workload(input)
                 if (res !== undefined && res !== null ) return res
