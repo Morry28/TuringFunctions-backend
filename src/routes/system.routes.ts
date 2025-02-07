@@ -5,14 +5,14 @@ import launchWork from "../utils/touringMachines"
 const router = Router()
 
 router.get('/api/turingmodels', (req, res, next) => {
-
+console.log('Req came')
 
 })
 
 router.post('/api/turingmodels/array', async (req: Request, res: Response, _next: NextFunction) => {
-
+    console.log('Request body:', req.body)
     const file = req.body.payload.file ?? generateSampleArray()
-    const userPrompt = req.body.payload.prompt
+    const userPrompt = req.body.payload
     const turingResponse = await launchWork(file, userPrompt)
 
     if (!turingResponse) {
