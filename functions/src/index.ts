@@ -1,19 +1,17 @@
-/**
- * Import function triggers from their respective submodules:
- *
- * import {onCall} from "firebase-functions/v2/https";
- * import {onDocumentWritten} from "firebase-functions/v2/firestore";
- *
- * See a full list of supported triggers at https://firebase.google.com/docs/functions
- */
+import fs from 'fs'
+import express from 'express'
+import systemRoutes from './routes/system.routes'
+import TuringMaching from './utils/touringMachines/basic.turingmachine'
 
-import {onRequest} from "firebase-functions/v2/https";
-import * as logger from "firebase-functions/logger";
+const app = express()
 
-// Start writing functions
-// https://firebase.google.com/docs/functions/typescript
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(systemRoutes)
 
-// export const helloWorld = onRequest((request, response) => {
-//   logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+app.listen(3000, () => { console.log('Server is running') })
+
+
+
+
+
