@@ -1,37 +1,19 @@
 import OpenAI from "openai";
 import {defineSecret} from "firebase-functions/params";
+import {onInit} from "firebase-functions/v2/core";
 import {arrayPrompt} from "../prompts/prompts";
 
 const OPENAI_API_KEY = defineSecret("OPENAI_API_KEY");
+let openai: OpenAI;
+onInit(() => {
+  openai = new OpenAI({apiKey: OPENAI_API_KEY.value()});
+});
 
 /**
  * Trieda na interakciu s OpenAI GPT-3 API.
  * @class
  */
 class GPTRules {
-  /**
-   * Inštancia OpenAI API klienta.
-   * @private
-   * @type {OpenAI}
-   */
-  private static openai = new OpenAI({apiKey: OPENAI_API_KEY.value()});
-
-  /**
-   * @return {Promise<OpenAI>}
-   * @static
-   * @async
-   */
-  static async getOpenAIInstance(): Promise<OpenAI> {
-    if (!this.openai) {
-      const apiKey = OPENAI_API_KEY.value() || '';
-      if (!apiKey) {
-        throw new Error("Missing OPENAI_API_KEY, fix in Firebase Console");
-      }
-      this.openai = new OpenAI({apiKey});
-    }
-    return this.openai;
-  }
-
   /**
    * Generuje pravidlá pre spracovanie súborov pomocou GPT-3.
    * @param {string} prompt - Užívateľský vstup.
@@ -42,7 +24,6 @@ class GPTRules {
    * @async
    */
   static async generate(prompt: string, sample: any, type: string) {
-    const openai = await this.getOpenAIInstance();
     const mainPrompt = arrayPrompt(sample, prompt);
 
     try {
