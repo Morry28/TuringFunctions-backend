@@ -1,13 +1,5 @@
 import OpenAI from "openai";
-import {defineSecret} from "firebase-functions/params";
-import {onInit} from "firebase-functions/v2/core";
 import {arrayPrompt} from "../prompts/prompts";
-
-const OPENAI_API_KEY = defineSecret("OPENAI_API_KEY");
-let openai: OpenAI;
-onInit(() => {
-  openai = new OpenAI({apiKey: OPENAI_API_KEY.value()});
-});
 
 /**
  * Trieda na interakciu s OpenAI GPT-3 API.
@@ -23,7 +15,16 @@ class GPTRules {
    * @static
    * @async
    */
-  static async generate(prompt: string, sample: any, type: string) {
+  static async generate(
+    prompt: string,
+    sample: any,
+    type: string): Promise<string | null> {
+    const apiKey = process.env.OPENAI_API_KEY;
+    const openai = new OpenAI({apiKey});
+    if (!openai) {
+      console.error("❌ OpenAI client is not initialized!");
+      return null;
+    }
     const mainPrompt = arrayPrompt(sample, prompt);
 
     try {

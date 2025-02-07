@@ -15,7 +15,7 @@ router.post(
   "/api/turingmodels/array",
   async (req: Request, res: Response, _next: NextFunction) => {
     console.log("Request body:", req.body);
-    const file = req.body.payload.file ?? generateSampleArray();
+    const file = req.body.file ?? generateSampleArray();
     const userPrompt = req.body.payload;
     const turingResponse = await launchWork(file, userPrompt);
 

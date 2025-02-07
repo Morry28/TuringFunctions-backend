@@ -10,7 +10,9 @@ import systemRoutes from "./routes/system.routes";
  */
 
 import {onRequest} from "firebase-functions/v2/https";
+import {defineSecret} from "firebase-functions/params";
 
+const OPENAI_API_KEY = defineSecret("OPENAI_API_KEY");
 
 const app = express();
 
@@ -20,6 +22,6 @@ app.use(systemRoutes);
 
 // app.listen(3000, () => { console.log('Server is running') })
 
-export const api = onRequest(app);
+export const api = onRequest({secrets: [OPENAI_API_KEY]}, app);
 
 

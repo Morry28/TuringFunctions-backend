@@ -56,7 +56,6 @@ class TuringMaching {
    */
   async run(input: unknown): Promise<unknown | null> {
     while (!this.rules) {
-      console.log("waiting for rules to be initialized...");
       await new Promise((resolve) => setTimeout(resolve, 1000));
     }
     if (this.rules === null) return null;
