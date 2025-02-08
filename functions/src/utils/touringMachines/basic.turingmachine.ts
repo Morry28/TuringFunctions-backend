@@ -21,7 +21,6 @@ class TuringMaching {
   rules: string | null = null;
 
   /**
-   * Konštruktor triedy.
    * @param {string} prompt - Užívateľský prompt.
    * @param {TSuppoertedFiles} sample - Vzor súboru.
    * @param {TSuppoertedTypes} type - Typ spracovania.

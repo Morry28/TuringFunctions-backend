@@ -7,7 +7,7 @@ export const arrayPrompt = (sample:any, prompt:any) =>
         Here is a sample of Array (first lines):
         "${sample}"
 
-        Access Array as a variable named 'input', type of Array.
+        Access Array as a variable named 'input', type of Array. Preffer loops over prototype methods.
         According to this Array structure, process the data to achieve the following request:
         User input: "${prompt}", if necessary convert string numbers into numbers.
         

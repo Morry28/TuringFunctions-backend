@@ -5,7 +5,7 @@ import launchWork from "../utils/touringMachines";
 // eslint-disable-next-line new-cap
 const router = Router();
 
-// TODO: when all models are done, implement this
+// TODO: when all models are done, implement this, move res to api status
 router.get("/api/turingmodels", (req, res, next) => {
   console.log("Req came");
   res.json({status: "live"});
@@ -21,7 +21,7 @@ router.post(
 
     if (!turingResponse) {
       res.status(500).json({
-        message: "Internal server error",
+        message: "Service Curently Unavailable",
         data: null,
       });
       return;

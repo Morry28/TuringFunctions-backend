@@ -7,6 +7,6 @@
  * toto bude vyriesene v dalsej verzii, pri zavedeni Firestore.
  */
 export function generateSampleArray(): number[] {
-  const dataRange = Math.floor(Math.random() * 10000 + 10);
+  const dataRange = Math.floor(Math.random() * 100000 + 10);
   return Array.from({length: 100000}).map(() => dataRange);
 }
