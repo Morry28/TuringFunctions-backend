@@ -8,7 +8,7 @@ const router = Router();
 // TODO: when all models are done, implement this, move res to api status
 router.get("/api/turingmodels", (req, res, next) => {
   console.log("Req came");
-  res.json({status: "live"});
+  res.status(200).json({status: "live"});
 });
 
 router.post(
